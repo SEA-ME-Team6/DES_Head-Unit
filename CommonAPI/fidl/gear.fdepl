@@ -1,0 +1,31 @@
+
+import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-4-SOMEIP_deployment_spec.fdepl"
+import "gear.fidl"
+
+define org.genivi.commonapi.someip.deployment for interface commonapi.GearSelection {
+    SomeIpServiceID = 4663
+
+    attribute gear {
+        SomeIpGetterID = 3003
+        SomeIpSetterID = 3004
+        SomeIpNotifierID = 33023
+        SomeIpNotifierEventGroups = { 33011 }
+
+        SomeIpAttributeReliable = true
+    }
+
+}
+
+
+define org.genivi.commonapi.someip.deployment for provider as Service {
+    instance commonapi.GearSelection {
+        InstanceId = "commonapi.Attributes"
+
+        SomeIpInstanceID = 22136
+
+        SomeIpUnicastAddress = "192.168.86.37"
+        SomeIpReliableUnicastPort = 30499
+        SomeIpUnreliableUnicastPort = 30500
+    }
+}
+

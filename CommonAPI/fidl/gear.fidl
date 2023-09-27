@@ -1,0 +1,9 @@
+package commonapi
+
+interface GearSelection {
+    version { major 1 minor 0 }
+
+    attribute Int32 gear 
+}
+
+
