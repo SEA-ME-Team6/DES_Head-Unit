@@ -1,0 +1,7 @@
+bitbake-cookerdaemon.log
+tmp/
+cache/
+sstate-cache/
+downloads/
+__pycache__/
+
