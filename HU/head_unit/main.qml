@@ -73,10 +73,10 @@ Window {
     Loader{
         id: mainLoader
         anchors{
-            left:parent.left
-            right: parent.right
-            top: statusBar.bottom
-            bottom:parent.bottom
+            left:leftb.right
+            right: rightb.right
+            top: topb.bottom
+            bottom:bottomb.top
     }
         source: "stackViewPage.qml"
 

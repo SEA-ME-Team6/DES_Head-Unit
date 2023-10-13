@@ -100,6 +100,7 @@ Item {
         ListElement { title: "Video 1"; source: "video1.mp4" }
         ListElement { title: "Video 2"; source: "video4.mp4" }
         ListElement { title: "Video 3"; source: "video3.mp4" }
+
         // Add more videos as needed
     }
 

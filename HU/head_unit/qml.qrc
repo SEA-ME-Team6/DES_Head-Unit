@@ -34,5 +34,6 @@
         <file>video3.mp4</file>
         <file>video4.mp4</file>
         <file>video1.mp4</file>
+        <file>light.qml</file>
     </qresource>
 </RCC>
