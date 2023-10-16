@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.0
-import QtLocation 5.15
+
 
 
 import"."

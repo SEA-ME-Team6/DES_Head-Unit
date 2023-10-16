@@ -4,22 +4,17 @@
         <file>background.png</file>
         <file>gearIcon.jpg</file>
         <file>gearImage.png</file>
-        <file>light.jpg</file>
-        <file>marker.jpg</file>
-        <file>music2.jpg</file>
         <file>stackViewPage.qml</file>
         <file>grid.qml</file>
         <file>CMakeLists.txt</file>
         <file>CMakeLists.txt.user</file>
         <file>gear.qml</file>
         <file>main.cpp</file>
-        <file>map2.qml</file>
         <file>qml.qrc</file>
         <file>musicPlayer.qml</file>
         <file>video.jpg</file>
         <file>musicPlayer.jpg</file>
         <file>song1.mp3</file>
-        <file>PlaylistModel.qml</file>
         <file>song2.mp3</file>
         <file>song5.mp3</file>
         <file>song4.mp3</file>
@@ -30,10 +25,8 @@
         <file>ps.jpg</file>
         <file>s.jpg</file>
         <file>video.qml</file>
-        <file>map.jpg</file>
         <file>video3.mp4</file>
         <file>video4.mp4</file>
         <file>video1.mp4</file>
-        <file>light.qml</file>
     </qresource>
 </RCC>
