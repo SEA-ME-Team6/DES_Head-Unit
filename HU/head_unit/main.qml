@@ -17,7 +17,7 @@ Window {
     title: qsTr("Head Unit")
     Image{
         id:backgroundImage
-        anchors.fill:root
+        anchors.fill:parent
         source: "background.png"
         }
     Rectangle {
@@ -73,11 +73,11 @@ Window {
     Loader{
         id: mainLoader
         anchors{
-            left:leftb.right
-            right: rightb.right
-            top: topb.bottom
-            bottom:bottomb.top
-    }
+                    left:parent.left
+                    right: parent.right
+                    top: statusBar.bottom
+                    bottom:parent.bottom
+        }
         source: "stackViewPage.qml"
 
     }

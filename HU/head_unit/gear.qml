@@ -11,7 +11,7 @@ Item {
         height: parent.height
         Image{
                id:gearImage
-               anchors.fill:root
+               anchors.fill:parent
                source: "background.png"
                }
         Button{
