@@ -5,8 +5,9 @@ import QtQuick.Controls 2.15
 import QtMultimedia 5.15
 
 Item {
+    visible:true
     width:1024
-    height: 600
+    height:600
 
     property int currentVideoIndex: -1
     property bool isPlaying: false
