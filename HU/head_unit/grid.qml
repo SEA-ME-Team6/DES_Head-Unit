@@ -7,107 +7,136 @@ Item {
     visible: true
     width: 1024
     height: 600
-    anchors.fill: parent
 
 
 
+        Column {
+            x:5
+            y:20
+            anchors.left: parent.left
+            spacing: 10
+            Button {
+                //text: "P"
 
-    Rectangle {
+                Image {
+                    width: parent.width
+                    height: parent.height
+                    source: "pg.jpg"
+                               }
 
-        id:leftb
-        width: 50
-        height: 600
+                /*contentItem: Text {
+                        text: parent.text
+                        color: "white" // Set the text color to red
+                        font.pixelSize: 50
+                        horizontalAlignment: Text.AlignHCenter // Center text horizontally
+                        verticalAlignment: Text.AlignVCenter // Center text vertically
+                                   }*/
+                width: 130 // Set the width of the button
+                height:130 // Set the height of the button
 
-        gradient: Gradient {
-            GradientStop { position: redSlider.value; color: "lime" }
-            GradientStop { position: greenSlider.value; color: "magenta" }
-            GradientStop { position: blueSlider.value; color: "blue" }
+                onClicked: {
+                    gearState = "Park"
+                }
+                background: Rectangle {
+                    color: gearState === "Park" ? "green" : "black"
+                    radius: 5
+                }
+            }
+
+            Button {
+                //text: "P"
+
+                Image {
+                    width: parent.width
+                    height: parent.height
+                    source: "rg.jpg"
+                               }
+
+                /*contentItem: Text {
+                        text: parent.text
+                        color: "white" // Set the text color to red
+                        font.pixelSize: 50
+                        horizontalAlignment: Text.AlignHCenter // Center text horizontally
+                        verticalAlignment: Text.AlignVCenter // Center text vertically
+                                   }*/
+                width: 130 // Set the width of the button
+                height:130 // Set the height of the button
+
+                onClicked: {
+                    gearState = "Reverse"
+                }
+                background: Rectangle {
+                    color: gearState === "Reverse" ? "green" : "black"
+                    radius: 5
+                }
+            }
+
+            Button {
+                //text: "P"
+
+                Image {
+                    width: parent.width
+                    height: parent.height
+                    source: "NG.jpg"
+                               }
+
+                /*contentItem: Text {
+                        text: parent.text
+                        color: "white" // Set the text color to red
+                        font.pixelSize: 50
+                        horizontalAlignment: Text.AlignHCenter // Center text horizontally
+                        verticalAlignment: Text.AlignVCenter // Center text vertically
+                                   }*/
+                width: 130 // Set the width of the button
+                height:130 // Set the height of the button
+
+                onClicked: {
+                    gearState = "Neutral"
+                }
+                background: Rectangle {
+                    color: gearState === "Neutral" ? "green" : "black"
+                    radius: 5
+                }
+            }
+
+            Button {
+                //text: "P"
+
+                Image {
+                    width: parent.width
+                    height: parent.height
+                    source: "dg.jpg"
+                               }
+
+                /*contentItem: Text {
+                        text: parent.text
+                        color: "white" // Set the text color to red
+                        font.pixelSize: 50
+                        horizontalAlignment: Text.AlignHCenter // Center text horizontally
+                        verticalAlignment: Text.AlignVCenter // Center text vertically
+                                   }*/
+                width: 130 // Set the width of the button
+                height:130 // Set the height of the button
+                font.pixelSize: 18 // Set the font size of the button text
+                onClicked: {
+                    gearState = "Drive"
+                }
+                background: Rectangle {
+                    color: gearState === "Drive" ? "green" : "black"
+                    radius: 5
+                }
+
+            }
         }
 
 
-    }
+    property string gearState: "Park"
 
-    Rectangle {
-        id:rightb
-        x: 974
-        width: 50
-        height: 600
 
-        gradient: Gradient {
-            GradientStop { position: redSlider.value; color: "lime" }
-            GradientStop { position: greenSlider.value; color: "magenta" }
-            GradientStop { position: blueSlider.value; color: "blue" }
-        }
-    }
-
-    Rectangle {
-        id:topb
-        anchors.top: parent.top
-        x: 50
-        width: 924
-        height: 50
-
-        gradient: Gradient {
-            GradientStop { position: redSlider.value; color: "lime" }
-            GradientStop { position: greenSlider.value; color: "magenta" }
-            GradientStop { position: blueSlider.value; color: "blue" }
-        }
-    }
-
-    Rectangle {
-        id:bottomb
-        anchors.bottom: parent.bottom
-        x: 50
-        width: 924
-        height: 50
-
-        gradient: Gradient {
-            GradientStop { position: greenSlider.value; color: "lime" }
-            GradientStop { position: redSlider.value; color: "magenta" }
-
-            GradientStop { position: blueSlider.value; color: "blue" }
-        }
-    }
-    Column {
-        spacing: 5
-        x: 460
-        y: 420
-
-        Slider {
-            id: redSlider
-            value: 0.0
-            orientation: Qt.Horizontal
-            onValueChanged: updateGradient()
-        }
-
-        Slider {
-            id: greenSlider
-            value: 0.0
-            orientation: Qt.Horizontal
-            onValueChanged: updateGradient()
-        }
-
-        Slider {
-            id: blueSlider
-            value: 0.0
-            orientation: Qt.Horizontal
-            onValueChanged: updateGradient()
-        }
-    }
-
-    function updateGradient() {
-        // Update the gradient based on the slider values
-        // The gradient is defined in the Rectangle's gradient property.
-    }
-
-    // Grid
-    Item {
-        x: 150
-        y: 100
 
         ListModel {
             id: listModel
-            ListElement { page: "gear.qml"; iconSource: "gearIcon.jpg" }
+            ListElement { page: "light.qml"; iconSource: "light.jpg" }
             ListElement { page: "musicPlayer.qml"; iconSource: "musicPlayer.jpg" }
             ListElement { page: "video.qml"; iconSource: "video.jpg" }
 
@@ -115,12 +144,14 @@ Item {
 
         GridView {
             id: gridView
-            width:900
+            x:400
+            y:200
+            width:600
             height:300
 
             model: listModel
             cellHeight:300
-            cellWidth: 300
+            cellWidth: 200
 
 
             delegate: Rectangle {
@@ -144,6 +175,6 @@ Item {
                 }
             }
         }
-    }
+
 }
 

@@ -13,9 +13,19 @@ Item {
     property bool isPlaying: false
     Button{
         id:backButton2
-        text:"Back"
+        width:70
+        height:70
+
+
+
+        Image {
+            width: parent.width
+            height: parent.height
+            source: "back.jpg"
+                       }
+        //text:"Back"
         onClicked: mainLoader.source="stackViewPage.qml"
-        contentItem: Text {
+       /* contentItem: Text {
                 text: parent.text
                 color: "white"
                 horizontalAlignment: Text.AlignHCenter // Center text horizontally
@@ -23,7 +33,7 @@ Item {
             }
         background: Rectangle{
             color:"black"
-        }
+        }*/
 
         anchors{
             bottom:parent.bottom
@@ -47,11 +57,17 @@ Item {
         delegate: Item {
             width: parent.width
             height: 50
+            Image {
+                        source: model.imageSource // Replace 'title' with 'imageSource' property
+                        width: 100
+                        height: 50 // Set the width and height as needed
+                    }
 
             Rectangle {
                 color: (playlistView.currentIndex === index) ? "lightblue" : "transparent"
-                width: parent.width
+                width: 100
                 height: 50
+                opacity: (playlistView.currentIndex === index) ? 0.6 : 0
 
                 MouseArea {
                     anchors.fill: parent
@@ -64,11 +80,7 @@ Item {
                     }
                 }
 
-                Text {
-                    text: model.title
-                    anchors.centerIn: parent
-                    color: "white"
-                }
+
             }
         }
     }
@@ -98,9 +110,9 @@ Item {
     ListModel {
         id: playlistModel
 
-        ListElement { title: "Video 1"; source: "video1.mp4" }
-        ListElement { title: "Video 2"; source: "video4.mp4" }
-        ListElement { title: "Video 3"; source: "video3.mp4" }
+        ListElement { imageSource: "v1"; source: "video1.mp4" }
+        ListElement { imageSource: "v2"; source: "video4.mp4" }
+        ListElement { imageSource: "v3"; source: "video3.mp4" }
 
         // Add more videos as needed
     }

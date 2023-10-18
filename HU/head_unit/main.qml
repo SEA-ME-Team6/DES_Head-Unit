@@ -38,35 +38,7 @@ Window {
                 left:statusBar.left
                 top:statusBar.top
             }
-           /* Button{
-                id:button1
-                width:parent.width/2
-                text: "Back"
-            }
-            Button{
-                id:button2
-                width:parent.width/2
-                text: "Home"
-                onClicked: mainLoader.source="stackViewPage"
-            }
 
-
-
-
-
-
-
-
-           // Text {
-            //    id:statusText
-             //   anchors{
-              //  top:parent.top
-             //   right: parent.right
-              //  }
-              //  width: parent.width/4
-              //  verticalAlignment: Text.AlignVCenter
-              //  color:"white"
-               // text: qsTr("text")*/
             }
 
         }

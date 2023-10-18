@@ -19,8 +19,18 @@ Item {
                }
         Button{
             id:backButton
-            text:"Back"
-            contentItem: Text {
+            width:70
+            height:70
+
+
+
+            Image {
+                width: parent.width
+                height: parent.height
+                source: "back.jpg"
+                           }
+            //text:"Back"
+            /*contentItem: Text {
                     text: parent.text
                     color: "white"
                     horizontalAlignment: Text.AlignHCenter // Center text horizontally
@@ -28,7 +38,7 @@ Item {
                 }
             background: Rectangle{
                 color:"black"
-            }
+            }*/
 
             anchors{
                 bottom:parent.bottom
@@ -56,14 +66,21 @@ Item {
 
 
             Button {
-                text: "P"
-                contentItem: Text {
+                //text: "P"
+
+                Image {
+                    width: parent.width
+                    height: parent.height
+                    source:"pg.jpg"
+                               }
+
+                /*contentItem: Text {
                         text: parent.text
                         color: "white" // Set the text color to red
                         font.pixelSize: 50
                         horizontalAlignment: Text.AlignHCenter // Center text horizontally
                         verticalAlignment: Text.AlignVCenter // Center text vertically
-                                   }
+                                   }*/
                 width: 100 // Set the width of the button
                 height:100 // Set the height of the button
 
@@ -77,14 +94,24 @@ Item {
             }
 
             Button {
-                text: "R"
-                contentItem: Text {
-                        text: parent.text
-                        color: "white" // Set the text color to red
-                        font.pixelSize: 50
-                        horizontalAlignment: Text.AlignHCenter // Center text horizontally
-                        verticalAlignment: Text.AlignVCenter // Center text vertically
-                    }
+                //text: "P"
+
+
+                    //text: "P"
+
+                    Image {
+                        width: parent.width
+                        height: parent.height
+                        source: "rg.jpg"
+                                   }
+
+                    /*contentItem: Text {
+                            text: parent.text
+                            color: "white" // Set the text color to red
+                            font.pixelSize: 50
+                            horizontalAlignment: Text.AlignHCenter // Center text horizontally
+                            verticalAlignment: Text.AlignVCenter // Center text vertically
+                                       }*/
                 width: 100 // Set the width of the button
                 height:100 // Set the height of the button
 
@@ -98,14 +125,21 @@ Item {
             }
 
             Button {
-                text: "N"
-                contentItem: Text {
+                //text: "P"
+
+                Image {
+                    width: parent.width
+                    height: parent.height
+                    source: "NG.jpg"
+                               }
+
+                /*contentItem: Text {
                         text: parent.text
                         color: "white" // Set the text color to red
                         font.pixelSize: 50
                         horizontalAlignment: Text.AlignHCenter // Center text horizontally
                         verticalAlignment: Text.AlignVCenter // Center text vertically
-                                   }
+                                   }*/
                 width: 100 // Set the width of the button
                 height:100 // Set the height of the button
 
@@ -119,14 +153,21 @@ Item {
             }
 
             Button {
-                text: "D"
-                contentItem: Text {
+                //text: "P"
+
+                Image {
+                    width: parent.width
+                    height: parent.height
+                    source: "dg.jpg"
+                               }
+
+                /*contentItem: Text {
                         text: parent.text
                         color: "white" // Set the text color to red
                         font.pixelSize: 50
                         horizontalAlignment: Text.AlignHCenter // Center text horizontally
                         verticalAlignment: Text.AlignVCenter // Center text vertically
-                                   }
+                                   }*/
                 width: 100 // Set the width of the button
                 height:100 // Set the height of the button
                 font.pixelSize: 18 // Set the font size of the button text

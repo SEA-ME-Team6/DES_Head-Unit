@@ -18,9 +18,16 @@ Item {
 
     Button{
         id:backButton3
-        text:"Back"
+        width:20
+        height:20
+        Image {
+            width: parent.width
+            height: parent.height
+            source: "back.jpg"
+                       }
+        //text:"Back"
         onClicked: mainLoader.source="stackViewPage.qml"
-        contentItem: Text {
+        /*contentItem: Text {
                 text: parent.text
                 color: "white"
                 horizontalAlignment: Text.AlignHCenter // Center text horizontally
@@ -28,7 +35,7 @@ Item {
             }
         background: Rectangle{
             color:"black"
-        }
+        }*/
 
         anchors{
             bottom:parent.bottom
@@ -48,11 +55,11 @@ Item {
         id: playlistModel
 
 
-        ListElement { title: "Song 1"; source: "song1.mp3" }
-        ListElement { title: "Song 2"; source: "song2.mp3" }
-        ListElement { title: "Song 3"; source: "song3.mp3" }
-        ListElement { title: "Song 4"; source: "song4.mp3" }
-        ListElement { title: "Song 5"; source: "song5.mp3" }
+        ListElement {imageSource: "s1"; source: "song1.mp3" }
+        ListElement { imageSource: "s2"; source: "song2.mp3" }
+        ListElement { imageSource: "s3"; source: "song3.mp3" }
+        ListElement { imageSource: "s4"; source: "song4.mp3" }
+        ListElement { imageSource: "s5"; source: "song5.mp3" }
         // Add more songs as needed
 
     }
@@ -71,13 +78,20 @@ Item {
         delegate: Item {
             width: parent.width
             height: 50
+            Image {
+                       source: model.imageSource // Replace 'title' with 'imageSource' property
+                       width: 100
+                       height: 50 // Set the width and height as needed
+                   }
 
             Rectangle {
                 color: (playlistView.currentIndex === index) ? "lightblue" : "transparent"
-                width: parent.width
+                width:100
                 height: 50
+                opacity: (playlistView.currentIndex === index) ? 0.6 : 0
 
                 MouseArea {
+
                     anchors.fill: parent
                     onClicked: {
                         mediaPlayer.stop()
@@ -87,11 +101,7 @@ Item {
                     }
                 }
 
-                Text {
-                    text: model.title
-                    anchors.centerIn: parent
-                    color: "white"
-                }
+
             }
         }
     }
