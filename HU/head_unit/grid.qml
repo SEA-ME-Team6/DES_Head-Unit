@@ -7,9 +7,6 @@ Item {
     visible: true
     width: 1024
     height: 600
-
-
-
         Column {
             x:5
             y:20
@@ -38,8 +35,12 @@ Item {
                     gearState = "Park"
                 }
                 background: Rectangle {
-                    color: gearState === "Park" ? "green" : "black"
+                    width: 130 // Set the width of the button
+                    height:130
+                    color: gearState === "Park" ? "lime" : "black"
                     radius: 5
+                    opacity: (gearState === "Park")?0.5:0
+                    z:1
                 }
             }
 
@@ -66,7 +67,11 @@ Item {
                     gearState = "Reverse"
                 }
                 background: Rectangle {
-                    color: gearState === "Reverse" ? "green" : "black"
+                    width: 130 // Set the width of the button
+                    height:130
+                    z:1
+                    color: gearState === "Reverse" ? "lime" : "black"
+                    opacity: (gearState === "Reverse")?0.5:0
                     radius: 5
                 }
             }
@@ -94,7 +99,11 @@ Item {
                     gearState = "Neutral"
                 }
                 background: Rectangle {
-                    color: gearState === "Neutral" ? "green" : "black"
+                    z:1
+                    width: 130 // Set the width of the button
+                    height:130
+                    color: gearState === "Neutral" ? "lime" : "black"
+                    opacity: (gearState === "Neutral")?0.6:0
                     radius: 5
                 }
             }
@@ -122,8 +131,12 @@ Item {
                     gearState = "Drive"
                 }
                 background: Rectangle {
-                    color: gearState === "Drive" ? "green" : "black"
+                    width: 130 // Set the width of the button
+                    height:130
+                    color: gearState === "Drive" ? "lime" : "black"
+                    opacity: (gearState === "Drive")?0.6:0
                     radius: 5
+                    z:1
                 }
 
             }
