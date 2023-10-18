@@ -1,12 +1,24 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
+import QtQuick.Extras 1.4
+import Qt.labs.settings 1.0
+
+
+
 
 
 Item {
     visible: true
     width: 1024
     height: 600
+    Text {
+                text: Qt.formatDateTime(new Date(), "dd.MM.yyyy    hh:mm:ss")
+                color:"white"
+                anchors.right: parent.right
+                anchors.top: parent.top
+                font.pointSize: 14
+            }
         Column {
             x:5
             y:20
@@ -188,6 +200,8 @@ Item {
                 }
             }
         }
+
+
 
 }
 
