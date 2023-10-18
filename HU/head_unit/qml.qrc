@@ -42,5 +42,8 @@
         <file>pg.jpg</file>
         <file>rg.jpg</file>
         <file>light.qml</file>
+        <file>blue.png</file>
+        <file>lime.png</file>
+        <file>magenta.png</file>
     </qresource>
 </RCC>

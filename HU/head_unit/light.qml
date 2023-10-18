@@ -64,8 +64,8 @@ Item {
         height: 600
 
         gradient: Gradient {
-            GradientStop { position: redSlider.value; color: "lime" }
-            GradientStop { position: greenSlider.value; color: "magenta" }
+            GradientStop { position: redSlider.value; color: "magenta" }
+            GradientStop { position: greenSlider.value; color: "lime" }
             GradientStop { position: blueSlider.value; color: "blue" }
         }
     }
@@ -78,8 +78,8 @@ Item {
         height: 50
 
         gradient: Gradient {
-            GradientStop { position: redSlider.value; color: "lime" }
-            GradientStop { position: greenSlider.value; color: "magenta" }
+            GradientStop { position: redSlider.value; color: "magenta" }
+            GradientStop { position: greenSlider.value; color: "lime" }
             GradientStop { position: blueSlider.value; color: "blue" }
         }
     }
@@ -103,11 +103,19 @@ Item {
         x: 460
         y: 420
 
+
         Slider {
             id: redSlider
             value: 0.3
             orientation: Qt.Horizontal
             onValueChanged: updateGradient()
+            Image {
+                width:20
+                height:20
+                anchors.right:redSlider.left
+
+                source: "magenta.png"
+            }
         }
 
         Slider {
@@ -115,6 +123,13 @@ Item {
             value: 0.5
             orientation: Qt.Horizontal
             onValueChanged: updateGradient()
+            Image {
+                width:20
+                height:20
+                anchors.right:greenSlider.left
+
+                source: "lime.png"
+            }
         }
 
         Slider {
@@ -122,8 +137,17 @@ Item {
             value: 0.4
             orientation: Qt.Horizontal
             onValueChanged: updateGradient()
+            Image {
+                width:20
+                height:20
+                anchors.right:blueSlider.left
+
+                source: "blue.png"
+            }
         }
+
     }
+
 
     function updateGradient() {
         // Update the gradient based on the slider values
