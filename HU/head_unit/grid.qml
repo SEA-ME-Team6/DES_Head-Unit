@@ -13,12 +13,26 @@ Item {
     width: 1024
     height: 600
     Text {
-                text: Qt.formatDateTime(new Date(), "dd.MM.yyyy    hh:mm:ss")
-                color:"white"
-                anchors.right: parent.right
-                anchors.top: parent.top
-                font.pointSize: 14
+            id: timeText
+            color: "white"
+            anchors.right: parent.right
+            anchors.top: parent.top
+            font.pixelSize: 20
+
+            function updateTime() {
+                timeText.text = Qt.formatDateTime(new Date(), "dd.MM.yyyy    hh:mm:ss");
             }
+
+            Timer {
+                interval: 1000 // Update every 1 second
+                running: true
+                repeat: true
+                onTriggered: timeText.updateTime()
+            }
+
+            Component.onCompleted: timeText.updateTime()
+        }
+
         Column {
             x:5
             y:20
