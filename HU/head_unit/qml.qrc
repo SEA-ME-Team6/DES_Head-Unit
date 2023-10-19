@@ -45,5 +45,6 @@
         <file>blue.png</file>
         <file>lime.png</file>
         <file>magenta.png</file>
+        <file>light.jpg</file>
     </qresource>
 </RCC>
