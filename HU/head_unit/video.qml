@@ -13,8 +13,8 @@ Item {
     property bool isPlaying: false
     Button{
         id:backButton2
-        width:70
-        height:70
+        width:100
+        height:100
 
 
 
@@ -123,8 +123,8 @@ Item {
         spacing: 10
 
         Button {
-            width: 50
-            height: 50
+            width: 100
+            height: 100
 
             Image {
                     source: "b.jpg"
@@ -139,8 +139,8 @@ Item {
         }
 
         Button {
-            width: 50
-            height: 50
+            width: 100
+            height:100
             Image {
                     source: isPlaying ? "ps.jpg" : "p.jpg"
                     width: parent.width
@@ -154,8 +154,8 @@ Item {
         }
 
         Button {
-            width: 50
-            height: 50
+            width: 100
+            height: 100
 
             Image {
                     source: "s.jpg"
@@ -171,8 +171,8 @@ Item {
 
         Button {
             id:next
-            width: 50
-            height: 50
+            width: 100
+            height: 100
 
             Image {
                     source: "f.jpg"

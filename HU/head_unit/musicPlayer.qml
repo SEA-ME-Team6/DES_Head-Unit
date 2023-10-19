@@ -18,8 +18,8 @@ Item {
 
     Button{
         id:backButton3
-        width:20
-        height:20
+        width:100
+        height:100
         Image {
             width: parent.width
             height: parent.height
