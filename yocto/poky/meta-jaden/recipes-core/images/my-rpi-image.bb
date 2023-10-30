@@ -6,7 +6,7 @@ LINGUAS_EN_US = "en-us"
 IMAGE_LINGUAS = "${LINGUAS_KO_KR} ${LINGUAS_EN_US}"
 IMAGE_OVERHEAD_FACTOR = "1.3"
 
-inherit extrausers populate_sdk populate_sdk_qt5
+inherit extrausers 
 
 EXTRA_USERS_PARAMS = "\
  	groupadd seame; \
@@ -15,3 +15,13 @@ EXTRA_USERS_PARAMS = "\
 	useradd -g seame team6; \
 "	
 
+KIRKSTONE_LOCAL_GETTY ?= " \
+                        ${IMAGE_ROOTFS}${systemd_system_unitdir}/serial-getty@.service \
+                        ${IMAGE_ROOTFS}${systemd_system_unitdir}/getty@.service \
+"    
+ 
+local_autologin () {
+    sed -i -e 's/^\(ExecStart *=.*getty \)/\1--autologin root /' ${KIRKSTONE_LOCAL_GETTY}
+}
+ 
+ROOTFS_POSTPROCESS_COMMAND += "local_autologin;"

@@ -15,15 +15,17 @@ IMG_BASE = " \
     common-api-c++-someip-dev \
     vsomeip \
     vsomeip-dev \
+    fonts \
+    python3-supervisor \
+    supervisor \
 "
 
 HU_PKGS = " \
     nano \
-    simple \
-    qt-test \
     racertest \
-    commonapi-server \
-    commonapi-client \
+    qt-hu \
+    ic-test \
+    hu-test \
 "
 
 QT_BASE = " \

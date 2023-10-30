@@ -104,3 +104,4 @@ FILES:${PN}-perf-utils = "${bindir}/cairo-trace* ${libdir}/cairo/*.la ${libdir}/
 BBCLASSEXTEND = "native nativesdk"
 
 UPSTREAM_CHECK_REGEX = "cairo-(?P<pver>\d+(\.\d+)+).tar.xz"
+
