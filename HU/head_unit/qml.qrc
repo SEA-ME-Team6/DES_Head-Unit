@@ -47,5 +47,6 @@
         <file>magenta.png</file>
         <file>light.jpg</file>
         <file>red.png</file>
+        <file>backgr.jpg</file>
     </qresource>
 </RCC>

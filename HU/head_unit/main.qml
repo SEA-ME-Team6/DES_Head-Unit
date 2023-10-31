@@ -18,7 +18,7 @@ Window {
     Image{
         id:backgroundImage
         anchors.fill:parent
-        source: "background.png"
+        source: "backgr.png"
         }
     Rectangle {
         id:statusBar

@@ -1,8 +1,12 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtMultimedia 5.15
+import QtQuick.Dialogs 1.3
+import QtQuick.Layouts 1.0
+
 
 Item {
+    id:music
     visible: true
     width: 1024
     height: 600
@@ -16,26 +20,24 @@ Item {
             }
 
 
+
     Button{
         id:backButton3
         width:100
         height:100
+
+
+
         Image {
             width: parent.width
             height: parent.height
             source: "back.jpg"
                        }
-        //text:"Back"
+
+
+
         onClicked: mainLoader.source="stackViewPage.qml"
-        /*contentItem: Text {
-                text: parent.text
-                color: "white"
-                horizontalAlignment: Text.AlignHCenter // Center text horizontally
-                verticalAlignment: Text.AlignVCenter // Center text vertically
-            }
-        background: Rectangle{
-            color:"black"
-        }*/
+
 
         anchors{
             bottom:parent.bottom
@@ -43,23 +45,96 @@ Item {
             margins: 40
 
         }
+    }
+    ListView {
+        id: playlistView
 
+        width: parent.width/3
+        height: parent.height/2
+        model: ListModel {
+            id: playlistModel
+        }
 
+        delegate: Item {
+            x:100
+
+            width: 924
 
         //onClicked: mainLoader.source="stackViewPage.qml"
+            height: 50
+            Rectangle {
 
+
+                width: parent.width
+                height: 50
+                color: "lightblue"
+                border.color: "blue"
+                Text {
+                    anchors.centerIn: parent
+                    text: model.title
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        mediaPlayer.stop()
+                        mediaPlayer.source = model.source
+                        mediaPlayer.play()
+                        playlistView.currentIndex = index
+                    }
+                }
+            }
+        }
+    }
+
+    MediaPlayer {
+        id: mediaPlayer
+        autoPlay: false
+    }
+
+    Button {
+        id:addbutton
+        text: "Add Songs"
+        onClicked: {
+            fileDialog.open()
+        }
+    }
+
+    FileDialog {
+        id: fileDialog
+        title: "Select Songs"
+        folder: "D:/"  // Set your initial folder here
+
+        onAccepted: {
+            var files = fileDialog.fileUrls
+            for (var i = 0; i < files.length; i++) {
+                var selectedFile = files[i].toString()
+                var fileName = selectedFile.substring(selectedFile.lastIndexOf("/") + 1)
+                var isDuplicate = false
+                for (var j = 0; j < playlistView.model.count; j++) {
+                    if (playlistView.model.get(j).source === selectedFile) {
+                        isDuplicate = true
+                        break
+                    }
+                }
+                if (!isDuplicate) {
+                    playlistView.model.append({ title: fileName, source: selectedFile })
+                }
+            }
+        }
+
+        onRejected: {
+            // User canceled the file selection
+        }
     }
 
     // Define a ListModel for your playlist
-    ListModel {
+  /*  ListModel {
         id: playlistModel
 
 
-        ListElement {imageSource: "s1"; source: "song1.mp3" }
-        ListElement { imageSource: "s2"; source: "song2.mp3" }
-        ListElement { imageSource: "s3"; source: "song3.mp3" }
-        ListElement { imageSource: "s4"; source: "song4.mp3" }
-        ListElement { imageSource: "s5"; source: "song5.mp3" }
+        ListElement { title: "Song 1"; source: "file:///E:/song1.mp3" }
+        ListElement { title: "Song 2"; source: "file:///E:/song2.mp3" }
+        ListElement { title: "Song 3"; source: "file:///E:/song3.mp3" }
         // Add more songs as needed
 
     }
@@ -79,14 +154,15 @@ Item {
             width: parent.width
             height: 50
             Image {
-                       source: model.imageSource // Replace 'title' with 'imageSource' property
+                       source: "white.jpg" // Replace 'title' with 'imageSource' property
                        width: 100
                        height: 50 // Set the width and height as needed
                    }
 
             Rectangle {
+
                 color: (playlistView.currentIndex === index) ? "lightblue" : "transparent"
-                width:100
+                width: 100
                 height: 50
                 opacity: (playlistView.currentIndex === index) ? 0.6 : 0
 
@@ -103,8 +179,11 @@ Item {
 
 
             }
+
+
+
         }
-    }
+    }*/
     Slider {
                 id:s1
                 x:250
@@ -208,7 +287,7 @@ Item {
                     var newIndex = playlistView.currentIndex + 1
                     if (newIndex < playlistModel.count) {
                         mediaPlayer.stop()
-                        mediaPlayer.source = playlistModel.get(newIndex).source
+                        mediaPlayer.source =playlistModel.get(newIndex).source
                         mediaPlayer.play()
                         playlistView.currentIndex = newIndex
                     }
@@ -232,6 +311,11 @@ Item {
                    }
                }
     }
+
+
+
+
+
 
 
 
