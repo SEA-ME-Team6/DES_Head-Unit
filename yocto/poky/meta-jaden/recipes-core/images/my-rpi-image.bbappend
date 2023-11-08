@@ -16,8 +16,9 @@ IMG_BASE = " \
     vsomeip \
     vsomeip-dev \
     fonts \
-    python3-supervisor \
+    automount \
     supervisor \
+    python3-supervisor \
 "
 
 HU_PKGS = " \
