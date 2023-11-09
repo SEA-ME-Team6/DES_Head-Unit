@@ -140,7 +140,7 @@ Item {
 
         Button {
             width: 100
-            height:100
+            height: 100
             Image {
                     source: isPlaying ? "ps.jpg" : "p.jpg"
                     width: parent.width

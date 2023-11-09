@@ -2,12 +2,17 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 import QtQuick.Extras 1.4
+
 import "."
 Item {
     id:griditem
     visible: true
     width: 1024
     height: 600
+
+
+
+
     function updateColor() {
 
                 // Update the color based on the sliders

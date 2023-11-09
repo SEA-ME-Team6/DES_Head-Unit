@@ -20,7 +20,7 @@ Item {
     Button {
         id: loadSongsButton
         text: "Load Songs from USB"
-
+        anchors.right: parent.right
 
         onClicked: {
             // Specify the folder path to your USB drive here

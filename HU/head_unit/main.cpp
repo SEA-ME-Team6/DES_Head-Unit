@@ -1,6 +1,7 @@
 #include <QGuiApplication>
+#include <QQmlContext>
 #include <QQmlApplicationEngine>
-
+#include "USBManager.h"
 
 
 int main(int argc, char *argv[])
@@ -9,10 +10,15 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QGuiApplication app(argc, argv);
+    USBManager usbManager;
+
+    // connect class
+    qmlRegisterType<USBManager>("USBManager", 1, 0, "USBManager");
     app.setOrganizationName("somename");
     app.setOrganizationDomain("somename");
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("usbManager", &usbManager);
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {

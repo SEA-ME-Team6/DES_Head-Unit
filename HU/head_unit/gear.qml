@@ -1,11 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+
 Item {
-    visible:true
     width:1024
     height:600
-
 
 
     Rectangle {
@@ -15,7 +14,7 @@ Item {
         Image{
                id:gearImage
                anchors.fill:parent
-               source: "background.png"
+               source: "background.jpg"
                }
         Button{
             id:backButton
@@ -29,8 +28,8 @@ Item {
                 height: parent.height
                 source: "back.jpg"
                            }
-            //text:"Back"
-            /*contentItem: Text {
+            /*text:"Back"
+            contentItem: Text {
                     text: parent.text
                     color: "white"
                     horizontalAlignment: Text.AlignHCenter // Center text horizontally
@@ -71,7 +70,7 @@ Item {
                 Image {
                     width: parent.width
                     height: parent.height
-                    source:"pg.jpg"
+                    source: "pg.jpg"
                                }
 
                 /*contentItem: Text {
@@ -88,30 +87,31 @@ Item {
                     gearState = "Park"
                 }
                 background: Rectangle {
+                    width: 100 // Set the width of the button
+                    height:100
                     color: gearState === "Park" ? "green" : "black"
                     radius: 5
+                    z:1
+                    opacity: (gearState === "Park") ? 1 : 0
                 }
             }
 
             Button {
                 //text: "P"
 
+                Image {
+                    width: parent.width
+                    height: parent.height
+                    source: "rg.jpg"
+                               }
 
-                    //text: "P"
-
-                    Image {
-                        width: parent.width
-                        height: parent.height
-                        source: "rg.jpg"
-                                   }
-
-                    /*contentItem: Text {
-                            text: parent.text
-                            color: "white" // Set the text color to red
-                            font.pixelSize: 50
-                            horizontalAlignment: Text.AlignHCenter // Center text horizontally
-                            verticalAlignment: Text.AlignVCenter // Center text vertically
-                                       }*/
+                /*contentItem: Text {
+                        text: parent.text
+                        color: "white" // Set the text color to red
+                        font.pixelSize: 50
+                        horizontalAlignment: Text.AlignHCenter // Center text horizontally
+                        verticalAlignment: Text.AlignVCenter // Center text vertically
+                                   }*/
                 width: 100 // Set the width of the button
                 height:100 // Set the height of the button
 
@@ -121,6 +121,10 @@ Item {
                 background: Rectangle {
                     color: gearState === "Reverse" ? "green" : "black"
                     radius: 5
+                    width:100
+                    height:100
+                    z:1
+                    opacity: (gearState === "Reverse") ? 1 : 0
                 }
             }
 
@@ -149,6 +153,10 @@ Item {
                 background: Rectangle {
                     color: gearState === "Neutral" ? "green" : "black"
                     radius: 5
+                    width:100
+                    height:100
+                    z:1
+                    opacity: (gearState === "Neutral") ? 1 : 0
                 }
             }
 
@@ -177,6 +185,10 @@ Item {
                 background: Rectangle {
                     color: gearState === "Drive" ? "green" : "black"
                     radius: 5
+                    width:100
+                    height:100
+                    z:1
+                    opacity: (gearState === "Drive") ? 1 : 0
                 }
 
             }

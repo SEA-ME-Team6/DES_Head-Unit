@@ -15,7 +15,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick)
+find_package(Qt5 COMPONENTS Core Quick Multimedia QuickControls2 REQUIRED)
 find_package(Qt5 COMPONENTS Multimedia REQUIRED)
+find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
 
 
@@ -25,7 +27,10 @@ find_package(Qt5 COMPONENTS Multimedia REQUIRED)
 set(PROJECT_SOURCES
         main.cpp
         qml.qrc
+
+        USBManager.cpp
 )
+
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(head_unit
@@ -40,6 +45,9 @@ else()
     if(ANDROID)
         add_library(head_unit SHARED
             ${PROJECT_SOURCES}
+
+
+
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
@@ -47,13 +55,16 @@ else()
         add_executable(head_unit
           ${PROJECT_SOURCES}
 
+        USBManager.h
+        USBManager.cpp
+
         )
     endif()
 endif()
 
 target_link_libraries(head_unit
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt5::Multimedia
-   Qt5::Quick)
+   Qt5::Quick Qt5::QuickControls2)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

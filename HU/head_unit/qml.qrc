@@ -1,9 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>background.png</file>
         <file>gearIcon.jpg</file>
-        <file>gearImage.png</file>
+        <file>light.jpg</file>
         <file>stackViewPage.qml</file>
         <file>grid.qml</file>
         <file>CMakeLists.txt</file>
@@ -29,8 +28,10 @@
         <file>video4.mp4</file>
         <file>video1.mp4</file>
         <file>back.jpg</file>
-        <file>NG.jpg</file>
         <file>dg.jpg</file>
+        <file>NG.jpg</file>
+        <file>rg.jpg</file>
+        <file>pg.jpg</file>
         <file>v3.jpg</file>
         <file>v2.jpg</file>
         <file>v1.jpg</file>
@@ -39,14 +40,14 @@
         <file>s3.jpg</file>
         <file>s2.jpg</file>
         <file>s1.jpg</file>
-        <file>pg.jpg</file>
-        <file>rg.jpg</file>
         <file>light.qml</file>
         <file>blue.png</file>
         <file>lime.png</file>
         <file>magenta.png</file>
-        <file>light.jpg</file>
+        <file>background.png</file>
+        <file>white.jpg</file>
         <file>red.png</file>
+        <file>background1.jpg</file>
         <file>backgr.jpg</file>
     </qresource>
 </RCC>
