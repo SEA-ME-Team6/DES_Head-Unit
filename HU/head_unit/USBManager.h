@@ -1,37 +1,39 @@
-
+// USBManager.h
+#ifndef USBMANAGER_H
 #define USBMANAGER_H
 
 #include <QObject>
-#include <QFileSystemWatcher>
 #include <QStringList>
 #include <QDir>
+#include <QMediaPlayer>
+
 class USBManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QStringList fileList READ fileList NOTIFY fileListChanged)
+
+
 
 public:
-    USBManager(QObject *parent = nullptr);
+    explicit USBManager(QObject *parent = nullptr);
+    QStringList fileList() const;
 
+    Q_INVOKABLE void startUSBScan();
 
 
 signals:
     void usbInserted();
     void usbRemoved();
-    void mp3FilesChanged(const QStringList &mp3Files);
-    void usbDevicePathChanged(const QString &usbDevicePath);
+    void fileListChanged();
 
-private slots:
-    void handleDirectoryChange(const QString &path);
-    void startCheckingForUSB();
+    // Add more signals as needed
 
 private:
-    QFileSystemWatcher usbWatcher;
-    QStringList mp3Files;
-    QString usbDirPath;
+    QStringList m_fileList;
+    QMediaPlayer m_mediaPlayer;
+    QString m_usbDrivePath;
+    void loadSongsFromUSB();
 
-
-    void findUSBDevicePath();
-    QStringList findMusicFiles(const QDir &directory, const QStringList &filters);
-    bool isUSBMounted(const QString &path);
-    void loadMP3Files(const QString &usbPath);
 };
+
+#endif // USBMANAGER_H

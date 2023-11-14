@@ -17,69 +17,45 @@ Item {
         anchors.fill: parent
         source: "background.png"
     }
-    Button {
-        id: loadSongsButton
-        text: "Load Songs from USB"
-        anchors.right: parent.right
-
-        onClicked: {
-            // Specify the folder path to your USB drive here
-            var usbDrivePath =  "file:///D:/media"; // Change to your USB drive path
-
-            // Set the folderListModel to the USB drive path
-            folderListModel.folder = usbDrivePath;
-            folderListModel.nameFilters = ["*.mp3"];
-        }
-    }
-
-
-
-
-
-
-    // USBManager is defined separately
     USBManager {
-        id: usbManager
+            id: usbManager
 
-    }
+        }
     Connections {
         target: usbManager
-        function onUsbInserted() {
-            console.log("USB Inserted");
-            Qt.debug("USB device detected");
 
-                    // Add the songs to the playlistModel automatically
-                    for (var i = 0; i < usbManager.mp3Files.length; i++) {
-                        var musicFile = usbManager.mp3Files[i];
-                        var fileName = musicFile.substring(musicFile.lastIndexOf("/") + 1);
-                        playlistModel.append({ title: fileName, source: musicFile });
-                    }
-            // Rest of your code for USB insertion
-        }
+        function onFileListChanged () {
+                   var files = usbManager.fileList;
+                   console.log("File list changed. New list1:", files);
+                   console.log("File list changed", usbManager.fileList.filePath);
+                   playlistModel.clear();
 
-        function onUsbRemoved() {
-            console.log("USB Removed");
-            // Rest of your code for USB removal
-        }
+                        // Add songs to the playlistModel
+                        for (var i = 0; i < files.length; i++) {
+                            var source ="file://" + files[i];
+
+                            var title = source.substring(source.lastIndexOf("/") + 1);
+
+                            playlistModel.append({ title: title, source: source });
+                        }
+
+                   // Update your UI or perform any other actions when the file list changes
+               }
+
+
     }
-    FolderListModel {
-        id: folderListModel
-        nameFilters: ["*.mp3"]  // Specify the file filter for songs
-        folder: "" // Leave it empty for now, we'll set it in the button's handler
-
-        onFolderChanged: {
-            if (folderListModel.folder !== "") {
-                playlistModel.clear(); // Clear the existing list
-                for (var i = 0; i < folderListModel.count; i++) {
-                    var source = folderListModel.get(i, "filePath");
-                    var title = source.substring(source.lastIndexOf("/") + 1);
 
 
-                    playlistModel.append({ title: title, source: source });
-                }
-            }
-        }
-    }
+       Button {
+           anchors.right:parent.right
+
+           text: "Start USB Scan"
+           onClicked: usbManager.startUSBScan()
+       }
+
+
+
+
 
 
 
@@ -109,11 +85,10 @@ Item {
         model: ListModel {
             id: playlistModel
 
-
         }
         delegate: Item {
             x: 100
-            width: 924
+            width: 800
             height: 50
             Rectangle {
                 width: parent.width
@@ -140,39 +115,12 @@ Item {
     MediaPlayer {
         id: mediaPlayer
         autoPlay: false
+
+
     }
 
 
-   /* FileDialog {
 
-        id: fileDialog
-        title: "Select Songs"
-        folder: "file:///D:/"  // Set your initial folder here
-
-        onAccepted: {
-            console.log("Folder path1: " + folder);
-            var files = fileDialog.fileUrls;
-            console.log("Folder path2: " + files);
-            for (var i = 0; i < files.length; i++) {
-
-                var selectedFile = files[i].toString();
-                var fileName = selectedFile.substring(selectedFile.lastIndexOf("/") + 1);
-                var isDuplicate = false;
-                for (var j = 0; j < playlistModel.count; j++) {
-                    if (playlistModel.get(j).source === selectedFile) {
-                        isDuplicate = true;
-                        break;
-                    }
-                }
-                if (!isDuplicate) {
-                    playlistModel.append({ title: fileName, source: selectedFile });
-                }
-            }
-        }
-        onRejected: {
-            // User canceled the file selection
-        }
-    }*/
 
     Slider {
         id: s1

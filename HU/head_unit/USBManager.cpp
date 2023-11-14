@@ -1,110 +1,53 @@
-
+// USBManager.cpp
 #include "USBManager.h"
-#include <QQmlEngine>
-#include <QDir>
 #include <QDebug>
-#include <QStorageInfo>
-#include <QQmlContext>
+#include <QFileInfo>
 
-
-
-USBManager::USBManager(QObject *parent)
-    : QObject(parent)
+USBManager::USBManager(QObject *parent) : QObject(parent)
 {
-
-
-    usbWatcher.addPath("D:/");
-    connect(&usbWatcher, &QFileSystemWatcher::directoryChanged, this, &USBManager::handleDirectoryChange);
-
-    startCheckingForUSB();
+    connect(this, &USBManager::usbInserted, this, &USBManager::loadSongsFromUSB);
+    // Connect more signals as needed
 }
-
-
-void USBManager::startCheckingForUSB()
+QStringList USBManager::fileList() const
 {
-    QDir usbRootDir("D:/");
-
-    if (usbRootDir.exists()) {
-        QStringList usbSubDirs = usbRootDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-
-        for (const QString &subDir : usbSubDirs) {
-            usbDirPath = "D:/" + subDir;
-
-            if (isUSBMounted(usbDirPath)) {
-                qDebug() << "send signal";
-
-                emit usbInserted();
-
-
-
-
-
-            }
-        }
-    }
-
-
+    return m_fileList;
 }
-
-
-
-void USBManager::handleDirectoryChange(const QString &path)
+void USBManager::startUSBScan()
 {
-    qDebug() << "handle Directory Changed!";
+    qDebug() << "USB scan initiated";
 
-    QDir usbRootDir(path);
+    // Assuming your USB drive is mounted at /media/username/USBDrive
+    m_usbDrivePath = "/media/seame-workstation11/5EDB-55FB"; // Change this to your actual USB path
 
-    if (usbRootDir.exists()) {
-        QStringList usbSubDirs = usbRootDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-
-        for (const QString &subDir : usbSubDirs) {
-            usbDirPath = "D:/" + subDir;
-        }
-    }
-
-    qDebug() << "path2: " << usbDirPath;
-
-    QDir usbDir(usbDirPath);
-
-    if(usbDir.exists()) {
+    QDir usbDir(m_usbDrivePath);
+    if (usbDir.exists() && usbDir.isReadable()) {
         emit usbInserted();
-        emit usbDevicePathChanged(usbDirPath);
-        loadMP3Files(usbDirPath);
     } else {
-        emit usbRemoved();
+        qDebug() << "Failed to mount USB";
     }
+    loadSongsFromUSB();
+    // Emit the signal indicating that the file list has changed
+    emit fileListChanged();
+
+    qDebug() << "USB scan completed";
 }
 
-bool USBManager::isUSBMounted(const QString &path)
+void USBManager::loadSongsFromUSB()
 {
-    QFileInfo fileInfo(path);
-    return fileInfo.isDir() && fileInfo.isWritable();
-}
-QStringList USBManager::findMusicFiles(const QDir &directory, const QStringList &filters)
-{
-    QStringList musicFiles;
+    m_fileList.clear();
 
-    if (directory.exists()) {
-        QStringList allFiles = directory.entryList(filters, QDir::Files);
+    QDir usbDir(m_usbDrivePath);
+    QStringList nameFilters;
+    nameFilters << "*.mp3";
 
-        for (const QString &fileName : allFiles) {
-            QString filePath = directory.filePath(fileName);
-            musicFiles.append(filePath);
-        }
+    QStringList files = usbDir.entryList(nameFilters, QDir::Files | QDir::NoDotAndDotDot);
+    for (const QString &file : files) {
+        QFileInfo fileInfo(usbDir.filePath(file));
+        m_fileList.append(fileInfo.absoluteFilePath());
     }
 
-    return musicFiles;
+    qDebug() << "File list loaded from USB:" << m_fileList;
+
+
+    // You can perform further actions with the loaded file list
 }
-void USBManager::loadMP3Files(const QString &usbPath)
-{
-    QDir usbDir(usbPath);
-    QStringList filters;
-    filters << "*.mp3" << "*.wav" << "*.ogg" << "*.flac"; // Add more formats if needed
-    mp3Files = findMusicFiles(usbDir, filters);
-
-    emit mp3FilesChanged(mp3Files);
-    qDebug() << "MP3 files loaded: " << mp3Files;
-}
-
-
-
