@@ -1,4 +1,0 @@
-Common targets are:
-    meta-ivi-image
-    ivi-image
-
