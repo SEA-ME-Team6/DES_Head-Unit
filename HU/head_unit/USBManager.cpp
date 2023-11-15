@@ -3,10 +3,12 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QStorageInfo>
+#include <QProcess>
 
 USBManager::USBManager(QObject *parent) : QObject(parent)
 {
     connect(this, &USBManager::usbInserted, this, &USBManager::loadSongsFromUSB);
+    connect(this, &USBManager::usbInserted, this, &USBManager::mountUSB);
     // Connect more signals as needed
 }
 QStringList USBManager::fileList() const
@@ -25,7 +27,7 @@ void USBManager::startUSBScan()
         if (drive.isValid() && drive.isReady() && drive.device().startsWith("/dev/sd")) {
             m_usbDrivePath = drive.rootPath();
             emit usbInserted();
-
+            mountUSB();
             // Emit the signal indicating that the file list has changed
             emit fileListChanged();
 
@@ -36,6 +38,38 @@ void USBManager::startUSBScan()
 
     qDebug() << "No USB drive found";
 }
+
+void USBManager::mountUSB()
+{
+    // Mount the USB drive using a system command
+    QString mountCommand = "udisksctl mount -b /dev/sdX";  // Replace /dev/sdX with the appropriate device name for your USB drive
+    QProcess process;
+    process.start(mountCommand);
+    process.waitForFinished();
+
+    if (process.exitCode() == 0) {
+        qDebug() << "USB drive mounted successfully";
+        emit usbInserted();
+
+        // Emit the signal indicating that the file list has changed
+        emit fileListChanged();
+    } else {
+        qDebug() << "Failed to mount USB drive";
+    }
+}
+
+bool USBManager::isUSBDriveMounted()
+{
+    // Check if the USB drive is already mounted
+    QProcess process;
+    process.start("udisksctl", QStringList() << "info" << "-b" << "/dev/sdX");  // Replace /dev/sdX with the appropriate device name for your USB drive
+    process.waitForFinished();
+
+    // If the exit code is 0, the device is mounted; otherwise, it is not
+    return process.exitCode() == 0;
+}
+
+
 void USBManager::loadSongsFromUSB()
 {
     m_fileList.clear();

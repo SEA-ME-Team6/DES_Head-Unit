@@ -33,6 +33,8 @@ private:
     QMediaPlayer m_mediaPlayer;
     QString m_usbDrivePath;
     void loadSongsFromUSB();
+    void mountUSB();
+    bool isUSBDriveMounted();
 
 };
 
