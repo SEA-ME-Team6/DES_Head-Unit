@@ -42,9 +42,12 @@ void USBManager::startUSBScan()
 void USBManager::mountUSB()
 {
     // Mount the USB drive using a system command
-    QString mountCommand = "udisksctl mount -b /dev/sdX";  // Replace /dev/sdX with the appropriate device name for your USB drive
+    QString mountCommand = "udisksctl mount -b /dev/sda1";  // Replace /dev/sdX with the appropriate device name for your USB drive
     QProcess process;
-    process.start(mountCommand);
+    QStringList arguments = mountCommand.split(' ', Qt::SkipEmptyParts);
+    QString program = arguments.takeFirst();  // Extract the program (udisksctl in this case)
+    process.start(program, arguments);
+
     process.waitForFinished();
 
     if (process.exitCode() == 0) {
@@ -55,6 +58,9 @@ void USBManager::mountUSB()
         emit fileListChanged();
     } else {
         qDebug() << "Failed to mount USB drive";
+        qDebug() << "Standard Output:" << process.readAllStandardOutput();
+        qDebug() << "Standard Error:" << process.readAllStandardError();
+
     }
 }
 
@@ -62,7 +68,7 @@ bool USBManager::isUSBDriveMounted()
 {
     // Check if the USB drive is already mounted
     QProcess process;
-    process.start("udisksctl", QStringList() << "info" << "-b" << "/dev/sdX");  // Replace /dev/sdX with the appropriate device name for your USB drive
+    process.start("udisksctl", QStringList() << "info" << "-b" << "/dev/sda1");  // Replace /dev/sdX with the appropriate device name for your USB drive
     process.waitForFinished();
 
     // If the exit code is 0, the device is mounted; otherwise, it is not
