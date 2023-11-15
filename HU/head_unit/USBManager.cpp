@@ -2,6 +2,7 @@
 #include "USBManager.h"
 #include <QDebug>
 #include <QFileInfo>
+#include <QStorageInfo>
 
 USBManager::USBManager(QObject *parent) : QObject(parent)
 {
@@ -16,22 +17,25 @@ void USBManager::startUSBScan()
 {
     qDebug() << "USB scan initiated";
 
-    // Assuming your USB drive is mounted at /media/username/USBDrive
-    m_usbDrivePath = "/media/seame-workstation11/5EDB-55FB"; // Change this to your actual USB path
+    // Get a list of available storage devices
+    QList<QStorageInfo> drives = QStorageInfo::mountedVolumes();
 
-    QDir usbDir(m_usbDrivePath);
-    if (usbDir.exists() && usbDir.isReadable()) {
-        emit usbInserted();
-    } else {
-        qDebug() << "Failed to mount USB";
+    // Check each drive for a USB drive
+    for (const QStorageInfo &drive : drives) {
+        if (drive.isValid() && drive.isReady() && drive.device().startsWith("/dev/sd")) {
+            m_usbDrivePath = drive.rootPath();
+            emit usbInserted();
+
+            // Emit the signal indicating that the file list has changed
+            emit fileListChanged();
+
+            qDebug() << "USB scan completed";
+            return; // Stop scanning once a USB drive is found
+        }
     }
-    loadSongsFromUSB();
-    // Emit the signal indicating that the file list has changed
-    emit fileListChanged();
 
-    qDebug() << "USB scan completed";
+    qDebug() << "No USB drive found";
 }
-
 void USBManager::loadSongsFromUSB()
 {
     m_fileList.clear();
