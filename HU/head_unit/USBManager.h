@@ -35,7 +35,9 @@ private:
     void loadSongsFromUSB();
     void mountUSB();
     bool isUSBDriveMounted();
-
+    QString findUSBDevice();
+    void umountUSB();
+    void removeUsbDirectory();
 };
 
 #endif // USBMANAGER_H
