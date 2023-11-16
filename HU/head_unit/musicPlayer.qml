@@ -47,7 +47,8 @@ Item {
 
 
        Button {
-           anchors.right:parent.right
+           x:300
+           y:70
 
            text: "Start USB Scan"
            onClicked: usbManager.startUSBScan()

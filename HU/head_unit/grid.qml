@@ -369,8 +369,10 @@ Item {
 
         GridView {
             id: gridView
-            x:600
-            y:200
+            //x:600
+            //y:200
+            x:200
+            y:70
             width:600
             height:100
 
