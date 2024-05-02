@@ -5,4 +5,3 @@
 [submodule "app-ipi"]
 	path = app-ipi
 	url = https://github.com/SEA-ME-Team6/app-ipi.git
-	branch = main
